@@ -1,6 +1,6 @@
 # coding=utf-8
-from DataBase.UserDB import User
-from DataBase.mongo_setup import global_init
+from Users.DataBase.UserDB import User
+from Users.DataBase.mongo_setup import global_init
 
 
 def main():

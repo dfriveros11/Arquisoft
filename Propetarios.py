@@ -49,7 +49,7 @@ class PropetarioID(Resource):
         if len(arreglo)> 0:
             thejson = json.dumps([{'idP':arreglo[0], 'Informacion': arreglo[1]}])
         else:
-            thejson = json.dumps({'Respuesta': 'No existe el Propetario con el id ' + idP})
+            thejson = json.dumps({'Respuesta': 'No existe el Propetario con el user_id ' + idP})
             return thejson
         return thejson
     def put(self, idP):
@@ -65,7 +65,7 @@ class PropetarioID(Resource):
             upsert=False
         )
         if result.matched_count == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Propetario que se va actualizar con el id ' + idP})
+            thejson = json.dumps({'Respuesta': 'No existe el Propetario que se va actualizar con el user_id ' + idP})
             return thejson
         else:
             return jsonify(idP = idP, Informacion = informacion)
@@ -90,7 +90,7 @@ class PropetarioID(Resource):
             )
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el Propetario que se va eliminar con el id ' + idP})
+            thejson = json.dumps({'Respuesta': 'No existe el Propetario que se va eliminar con el user_id ' + idP})
             return thejson
 
 api.add_resource(Propetario, '/propetarios')

@@ -49,7 +49,7 @@ class PropetarioID(Resource):
         if len(arreglo)> 0:
             thejson = json.dumps([{'idP':arreglo[0], 'Informacion': arreglo[1]}])
         else:
-            thejson = json.dumps({'Respuesta': 'No existe el Propetario con el id ' + idP})
+            thejson = json.dumps({'Respuesta': 'No existe el Propetario con el user_id ' + idP})
             return thejson
         return thejson
     def put(self, idP):
@@ -65,7 +65,7 @@ class PropetarioID(Resource):
             upsert=False
         )
         if result.matched_count == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Propetario que se va actualizar con el id ' + idP})
+            thejson = json.dumps({'Respuesta': 'No existe el Propetario que se va actualizar con el user_id ' + idP})
             return thejson
         else:
             return jsonify(idP = idP, Informacion = informacion)
@@ -90,7 +90,7 @@ class PropetarioID(Resource):
             )
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el Propetario que se va eliminar con el id ' + idP})
+            thejson = json.dumps({'Respuesta': 'No existe el Propetario que se va eliminar con el user_id ' + idP})
             return thejson
 class Horario(Resource):
     def post(self):
@@ -139,7 +139,7 @@ class HorarioID(Resource):
         if len(arreglo)> 0:
             thejson = json.dumps([{'idH:':arreglo[0], 'Dia:':arreglo[1], 'Hora1:':arreglo[2], 'Hora2:':arreglo[3], 'TimeZone:':arreglo[4]}])
         else:
-            thejson = json.dumps({'Respuesta': 'No existe el Dia con el id ' + idD})
+            thejson = json.dumps({'Respuesta': 'No existe el Dia con el user_id ' + idD})
             return thejson
         return thejson
     def put(self, idD):
@@ -161,7 +161,7 @@ class HorarioID(Resource):
             upsert=False
         )
         if result.matched_count == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Dia que se va actualizar con el id ' + idD})
+            thejson = json.dumps({'Respuesta': 'No existe el Dia que se va actualizar con el user_id ' + idD})
             return thejson
         else:
             return jsonify(idD = idD, Dia = dia, Hora1 = horaP, Hora2 = horaS, timeZone = timeZone)
@@ -189,7 +189,7 @@ class HorarioID(Resource):
             )
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el Horario que se va eliminar con el id ' + idD})
+            thejson = json.dumps({'Respuesta': 'No existe el Horario que se va eliminar con el user_id ' + idD})
             return thejson
 class Cerradura(Resource):
     def post(self):
@@ -238,7 +238,7 @@ class CerraduraID(Resource):
         if len(arreglo)> 0:
             thejson = json.dumps([{'idC:':arreglo[0], 'EstadoActual:':arreglo[1], 'HealthCheck:':arreglo[2], 'Horarios:':arreglo[3], 'Propetarios:':arreglo[4]}])
         else:
-            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el id ' + idC})
+            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el user_id ' + idC})
             return thejson
         return thejson
     def put(self, idC):
@@ -256,7 +256,7 @@ class CerraduraID(Resource):
             upsert=False
         )
         if result.matched_count == 0:
-            thejson = json.dumps({'Respuesta': 'No existe la cerradura que se va actualizar con el id ' + idC})
+            thejson = json.dumps({'Respuesta': 'No existe la cerradura que se va actualizar con el user_id ' + idC})
             return thejson
         else:
             return jsonify(idC = idC, EstadoActual = estadoActual, HealthCheck = healthCheck)
@@ -284,20 +284,20 @@ class CerraduraID(Resource):
             )
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe la cerradura que se va eliminar con el id ' + idC})
+            thejson = json.dumps({'Respuesta': 'No existe la cerradura que se va eliminar con el user_id ' + idC})
             return thejson
 class CerraduraIDHorarios(Resource):
     def post(self, idC):
         json_data = request.get_json(force = True)
-        idH = json_data['id']
+        idH = json_data['user_id']
         cursor = dbHorarios.find({"idH": idH}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Horario con el id ' + idH})
+            thejson = json.dumps({'Respuesta': 'No existe el Horario con el user_id ' + idH})
             return thejson
         else:
             cursor = dbCerraduras.find({"idC":idC, "Horarios.idH"+str(idH):idH}).count()
             if cursor > 0:
-                thejson = json.dumps({'Respuesta': 'Ya existe el Horario con el id ' + idH + ' en la cerradura ' +idC})
+                thejson = json.dumps({'Respuesta': 'Ya existe el Horario con el user_id ' + idH + ' en la cerradura ' +idC})
                 return thejson
             else:
                 try:
@@ -341,19 +341,19 @@ class CerraduraIDHorariosID(Resource):
             thejson = json.dumps([{'idC':arreglo[0], 'idH':arreglo[1]}])
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el Horario con el id ' + idH + ' en la cerradura con el id ' + idC})
+            thejson = json.dumps({'Respuesta': 'No existe el Horario con el user_id ' + idH + ' en la cerradura con el user_id ' + idC})
             return thejson
     def put(self, idC, idH):
         json_data = request.get_json(force = True)
-        idN = json_data['id']
+        idN = json_data['user_id']
         cursor = dbHorarios.find({"idH":idH}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Horario con el id ' + idH})
+            thejson = json.dumps({'Respuesta': 'No existe el Horario con el user_id ' + idH})
             return thejson
         else:
             cursor = dbCerraduras.find({"idC":idC, "Horarios.idH"+str(idH): idH}).count()
             if cursor == 0:
-                thejson = json.dumps({'Respuesta': 'No existe el Horario con el id ' + idH + ' en la cerradura con id '+ idC})
+                thejson = json.dumps({'Respuesta': 'No existe el Horario con el user_id ' + idH + ' en la cerradura con user_id '+ idC})
                 return thejson
             else:
                 try:
@@ -382,7 +382,7 @@ class CerraduraIDHorariosID(Resource):
     def delete(self, idC, idH):
         cursor = dbCerraduras.find({"idC":idC, "Horarios.idH"+str(idH):idH}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el id ' + idC + ' y el horario a borrar con el id ' + idH})
+            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el user_id ' + idC + ' y el horario a borrar con el user_id ' + idH})
             return thejson
         else:
             try:
@@ -403,15 +403,15 @@ class CerraduraIDHorariosID(Resource):
 class CerraduraIDPropetarios(Resource):
     def post(self, idC):
         json_data = request.get_json(force = True)
-        idP = json_data['id']
+        idP = json_data['user_id']
         cursor = dbPropetarios.find({"idP": idP}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Propetaario con el id ' + idP})
+            thejson = json.dumps({'Respuesta': 'No existe el Propetaario con el user_id ' + idP})
             return thejson
         else:
             cursor = dbCerraduras.find({"idC":idC, "Propetarios.idP"+str(idP):idP}).count()
             if cursor > 0:
-                thejson = json.dumps({'Respuesta': 'Ya existe el Propetario con el id ' + idP + ' en la cerradura ' +idC})
+                thejson = json.dumps({'Respuesta': 'Ya existe el Propetario con el user_id ' + idP + ' en la cerradura ' +idC})
                 return thejson
             else:
                 try:
@@ -454,19 +454,19 @@ class CerraduraIDPropetariosID(Resource):
             thejson = json.dumps([{'idC':arreglo[0], 'idP':arreglo[1]}])
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el Propetario con el id ' + idP + ' en la cerradura con el id ' + idC})
+            thejson = json.dumps({'Respuesta': 'No existe el Propetario con el user_id ' + idP + ' en la cerradura con el user_id ' + idC})
             return thejson
     def put(self, idC, idP):
         json_data = request.get_json(force = True)
-        idN = json_data['id']
+        idN = json_data['user_id']
         cursor = dbPropetarios.find({"idP":idP}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Propetario con el id ' + idP})
+            thejson = json.dumps({'Respuesta': 'No existe el Propetario con el user_id ' + idP})
             return thejson
         else:
             cursor = dbCerraduras.find({"idC":idC, "Propetarios.idP"+str(idP): idP}).count()
             if cursor == 0:
-                thejson = json.dumps({'Respuesta': 'No existe el Propetario con el id ' + idP + ' en la cerradura con id '+ idC})
+                thejson = json.dumps({'Respuesta': 'No existe el Propetario con el user_id ' + idP + ' en la cerradura con user_id '+ idC})
                 return thejson
             else:
                 try:
@@ -495,7 +495,7 @@ class CerraduraIDPropetariosID(Resource):
     def delete(self, idC, idP):
         cursor = dbCerraduras.find({"idC":idC, "Propetarios.idP"+str(idP):idP}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el id ' + idC + ' y el Propetario a borrar con el id ' + idP})
+            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el user_id ' + idC + ' y el Propetario a borrar con el user_id ' + idP})
             return thejson
         else:
             try:
@@ -552,7 +552,7 @@ class PermisosID(Resource):
         if len(arreglo)> 0:
             thejson = json.dumps([{'idV:':arreglo[0], 'Dirrecion:':arreglo[1], 'Cerraduras:':arreglo[2]}])
         else:
-            thejson = json.dumps({'Respuesta': 'No existe el Permiso con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe el Permiso con el user_id ' + idV})
             return thejson
         return thejson
     def put(self, idV):
@@ -568,7 +568,7 @@ class PermisosID(Resource):
             upsert=False
         )
         if result.matched_count == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el permiso que se va actualizar con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe el permiso que se va actualizar con el user_id ' + idV})
             return thejson
         else:
             return jsonify(idV = idV, Dirrecion = dirrecion)
@@ -585,20 +585,20 @@ class PermisosID(Resource):
             dbPermisos.remove({"idV": idV})
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el permiso que se va eliminar con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe el permiso que se va eliminar con el user_id ' + idV})
             return thejson
 class PermisosIDCerradura(Resource):
     def post(self, idV):
         json_data = request.get_json(force = True)
-        idC = json_data['id']
+        idC = json_data['user_id']
         cursor = dbCerraduras.find({"idC": idC}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el id ' + idC})
+            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el user_id ' + idC})
             return thejson
         else:
             cursor = dbCerraduras.find({"idV":idV, "Cerraduras.idC"+str(idC):idC}).count()
             if cursor > 0:
-                thejson = json.dumps({'Respuesta': 'Ya existe la Cerradura con el id ' + idC + ' en el permiso' +idV})
+                thejson = json.dumps({'Respuesta': 'Ya existe la Cerradura con el user_id ' + idC + ' en el permiso' +idV})
                 return thejson
             else:
                 try:
@@ -641,19 +641,19 @@ class PermisosIDCerraduraID(Resource):
             thejson = json.dumps([{'idV':arreglo[0], 'idC':arreglo[1]}])
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el Cerradura con el id ' + idC + ' en la Permiso con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe el Cerradura con el user_id ' + idC + ' en la Permiso con el user_id ' + idV})
             return thejson
     def put(self, idV, idC):
         json_data = request.get_json(force = True)
-        idN = json_data['id']
+        idN = json_data['user_id']
         cursor = dbCerraduras.find({"idC":idC}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Cerraduras con el id ' + idC})
+            thejson = json.dumps({'Respuesta': 'No existe el Cerraduras con el user_id ' + idC})
             return thejson
         else:
             cursor = dbPermisos.find({"idV":idV, "Cerraduras.idC"+str(idC): idC}).count()
             if cursor == 0:
-                thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el id ' + idC + ' en el Permiso con id '+ idV})
+                thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el user_id ' + idC + ' en el Permiso con user_id '+ idV})
                 return thejson
             else:
                 try:
@@ -682,7 +682,7 @@ class PermisosIDCerraduraID(Resource):
     def delete(self, idV, idC):
         cursor = dbPermisos.find({"idV":idV, "Cerraduras.idC"+str(idC):idC}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el id ' + idC + ' en el Permiso a borrar con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el user_id ' + idC + ' en el Permiso a borrar con el user_id ' + idV})
             return thejson
         else:
             try:

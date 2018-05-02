@@ -53,7 +53,7 @@ class PermisosID(Resource):
         if len(arreglo)> 0:
             thejson = json.dumps([{'idV:':arreglo[0], 'Dirrecion:':arreglo[1], 'Cerraduras:':arreglo[2]}])
         else:
-            thejson = json.dumps({'Respuesta': 'No existe el Permiso con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe el Permiso con el user_id ' + idV})
             return thejson
         return thejson
     def put(self, idV):
@@ -69,7 +69,7 @@ class PermisosID(Resource):
             upsert=False
         )
         if result.matched_count == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el permiso que se va actualizar con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe el permiso que se va actualizar con el user_id ' + idV})
             return thejson
         else:
             return jsonify(idV = idV, Dirrecion = dirrecion)
@@ -86,20 +86,20 @@ class PermisosID(Resource):
             dbPermisos.remove({"idV": idV})
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el permiso que se va eliminar con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe el permiso que se va eliminar con el user_id ' + idV})
             return thejson
 class PermisosIDCerradura(Resource):
     def post(self, idV):
         json_data = request.get_json(force = True)
-        idC = json_data['id']
+        idC = json_data['user_id']
         cursor = dbCerraduras.find({"idC": idC}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el id ' + idC})
+            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el user_id ' + idC})
             return thejson
         else:
             cursor = dbCerraduras.find({"idV":idV, "Cerraduras.idC"+str(idC):idC}).count()
             if cursor > 0:
-                thejson = json.dumps({'Respuesta': 'Ya existe la Cerradura con el id ' + idC + ' en el permiso' +idV})
+                thejson = json.dumps({'Respuesta': 'Ya existe la Cerradura con el user_id ' + idC + ' en el permiso' +idV})
                 return thejson
             else:
                 try:
@@ -142,19 +142,19 @@ class PermisosIDCerraduraID(Resource):
             thejson = json.dumps([{'idV':arreglo[0], 'idC':arreglo[1]}])
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el Cerradura con el id ' + idC + ' en la Permiso con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe el Cerradura con el user_id ' + idC + ' en la Permiso con el user_id ' + idV})
             return thejson
     def put(self, idV, idC):
         json_data = request.get_json(force = True)
-        idN = json_data['id']
+        idN = json_data['user_id']
         cursor = dbCerraduras.find({"idC":idC}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Cerraduras con el id ' + idC})
+            thejson = json.dumps({'Respuesta': 'No existe el Cerraduras con el user_id ' + idC})
             return thejson
         else:
             cursor = dbPermisos.find({"idV":idV, "Cerraduras.idC"+str(idC): idC}).count()
             if cursor == 0:
-                thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el id ' + idC + ' en el Permiso con id '+ idV})
+                thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el user_id ' + idC + ' en el Permiso con user_id '+ idV})
                 return thejson
             else:
                 try:
@@ -183,7 +183,7 @@ class PermisosIDCerraduraID(Resource):
     def delete(self, idV, idC):
         cursor = dbPermisos.find({"idV":idV, "Cerraduras.idC"+str(idC):idC}).count()
         if cursor == 0:
-            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el id ' + idC + ' en el Permiso a borrar con el id ' + idV})
+            thejson = json.dumps({'Respuesta': 'No existe la Cerradura con el user_id ' + idC + ' en el Permiso a borrar con el user_id ' + idV})
             return thejson
         else:
             try:

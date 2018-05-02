@@ -62,7 +62,7 @@ class HorarioID(Resource):
         if len(arreglo)> 0:
             thejson = json.dumps([{'idH:':arreglo[0], 'Dia:':arreglo[1], 'Hora1:':arreglo[2], 'Hora2:':arreglo[3], 'TimeZone:':arreglo[4]}])
         else:
-            thejson = json.dumps({'Respuesta': 'No existe el Dia con el id ' + idD})
+            thejson = json.dumps({'Respuesta': 'No existe el Dia con el user_id ' + idD})
             return thejson
         return thejson
     def put(self, idD):
@@ -84,7 +84,7 @@ class HorarioID(Resource):
             upsert=False
         )
         if result.matched_count == 0:
-            thejson = json.dumps({'Respuesta': 'No existe el Dia que se va actualizar con el id ' + idD})
+            thejson = json.dumps({'Respuesta': 'No existe el Dia que se va actualizar con el user_id ' + idD})
             return thejson
         else:
             return jsonify(idD = idD, Dia = dia, Hora1 = horaP, Hora2 = horaS, timeZone = timeZone)
@@ -112,7 +112,7 @@ class HorarioID(Resource):
             )
             return thejson
         except:
-            thejson = json.dumps({'Respuesta': 'No existe el Horario que se va eliminar con el id ' + idD})
+            thejson = json.dumps({'Respuesta': 'No existe el Horario que se va eliminar con el user_id ' + idD})
             return thejson
 
 api.add_resource(Horario, '/horarios')

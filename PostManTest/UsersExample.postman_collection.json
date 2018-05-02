@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "439968e4-a0cc-407f-b8bb-355e3460851d",
+		"name": "UsersExample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TestUser",
+			"description": "",
+			"item": [
+				{
+					"name": "PostUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"name\":\"diego\",\n\t\"email\":\"df.riveros11@gmail.com\",\n\t\"roles\":[\n\t\t\t\n\t\t]\n\t\n}"
+						},
+						"url": "http://127.0.0.1:5000/users"
+					},
+					"response": []
+				},
+				{
+					"name": "PostUser2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 2,\n\t\"name\":\"john\",\n\t\"email\":\"j.angel@yahoo.com\",\n\t\"roles\":[\n\t\t\t\n\t\t]\n\t\n}"
+						},
+						"url": "http://127.0.0.1:5000/users"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users"
+					},
+					"response": []
+				},
+				{
+					"name": "PUTUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"pez\",jsonify(user_id=user.user_id, name=user.name, email=user.email, roles=user.roles)\n\t\"email\":\"df.jjaj@gmail.com\"\n}"
+						},
+						"url": "http://127.0.0.1:5000/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETEUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserDelete",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETEUser2",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users/2"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUsersDelete",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TestUserRoles",
+			"description": "",
+			"item": [
+				{
+					"name": "PostUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"name\":\"diego\",\n\t\"email\":\"df.riveros11@gmail.com\",\n\t\"roles\":[\n\t\t\t\n\t\t]\n\t\n}"
+						},
+						"url": "http://127.0.0.1:5000/users"
+					},
+					"response": []
+				},
+				{
+					"name": "PostRol",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 1,\n\t\"name\":\"diego\",\n\t\"email\":\"df.riveros11@gmail.com\",\n\t\"roles\":[\n\t\t\t\n\t\t]\n\t\n}"
+						},
+						"url": "http://127.0.0.1:5000/users"
+					},
+					"response": []
+				},
+				{
+					"name": "PostRol2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"rol\":\"yale\"\n}"
+						},
+						"url": "http://127.0.0.1:5000/users/1/roles"
+					},
+					"response": []
+				},
+				{
+					"name": "GETALLRoles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users/1/roles"
+					},
+					"response": []
+				},
+				{
+					"name": "PUTRol",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"rol\":\"seguridad\"\n}"
+						},
+						"url": "http://127.0.0.1:5000/users/1/roles/yale"
+					},
+					"response": []
+				},
+				{
+					"name": "GetRol",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users/1/roles/seguridad"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users/1/roles/administrador"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete2",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users/1/roles/seguridad"
+					},
+					"response": []
+				},
+				{
+					"name": "GETALLRolesDelete",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {},
+						"url": "http://127.0.0.1:5000/users/1/roles"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -7,16 +7,20 @@ import json
 app = Flask(__name__)
 api = Api(app)
 
-clienteMongo = MongoClient('localhost', 27017)
-db = clienteMongo['arquisoftdb']
+mongodatabase = MongoClient('localhost', 27017)
+db = mongodatabase['arquisoftdb']
 dbPropetarios = db.propetarios
 dbPermisos = db.permisos
 dbHorarios = db.horarios
 dbCerraduras = db.cerraduras
 
+
 class Cerradura(Resource):
+    """Return the pathname of the KOS root directory."""
+    @app.route('/$ROUTE_NAME$', methods=['GET', 'POST'])
     def post(self):
-        json_data = request.get_json(force = True)
+        """Return the pathname of the KOS root directory."""
+        json_data = request.get_json(force=True)
         idC = json_data['idC']
         estadoActual = json_data['EstadoActual']
         healthCheck = json_data['HealthCheck']
